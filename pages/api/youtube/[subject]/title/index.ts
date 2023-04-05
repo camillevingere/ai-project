@@ -7,8 +7,6 @@ export default async function handler(
   res: NextApiResponse
 ) {
   if (req.method === "GET") {
-    console.log("Subject: ", req.query.subject);
-
     try {
       const gptResponse = await openai.createCompletion(
         {
@@ -21,20 +19,6 @@ export default async function handler(
           timeout: 60000,
         }
       );
-
-      /*const text =
-        "\n" +
-        "\n" +
-        "1. 10 astuces pour une grossesse sereine\n" +
-        "2. Les signes que vous êtes enceinte\n" +
-        "3. Se préparer à la maternité\n" +
-        "4. Préparer son corps et son esprit à une grossesse heureuse\n" +
-        "5. Comment bien vivre votre grossesse\n" +
-        "6. Exercices de préparation à la grossesse \n" +
-        "7. Les meilleurs aliments à consommer durant la grossesse\n" +
-        "8. L'importance des soins prénataux\n" +
-        "9. Aidez votre bébé à se développer en toute sécurité \n" +
-        "10. Un regard sur la grossesse - le point de vue des médecins";*/
 
       const text = gptResponse.data?.choices[0]?.text;
 
